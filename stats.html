@@ -26,4 +26,4 @@ document.getElementById("e").style.display="none";document.getElementById("s").s
 const p=document.getElementById("p").value;
 try{const t=await open_(p);sessionStorage.setItem("kwm_pw",p);show(t)}
 catch(e){document.getElementById("s").style.display="none";document.getElementById("e").style.display="block"}});
-</script></body></html>
+</script><button class="btn-refresh" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#e9c86a;color:#071329;border:none;border-radius:12px;padding:12px 18px;font-weight:700;font-size:.9rem;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.4)" onclick="location.href=location.pathname+'?t='+Date.now()+location.hash">🔄 تحديث</button><button class="btn-refresh" style="position:fixed;bottom:20px;right:20px;z-index:9999;background:#e9c86a;color:#071329;border:none;border-radius:12px;padding:12px 18px;font-weight:700;font-size:.9rem;cursor:pointer" onclick="location.reload(true)">🔄 تحديث</button></body></html>
