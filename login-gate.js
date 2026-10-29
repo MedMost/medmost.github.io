@@ -3,7 +3,14 @@ const P={"s": "8Ctkl27cU76hD9xQKUnKMw==", "i": "mjpVcx2ehSE+w2zU", "d": "bdcL2UR
 const b=s=>Uint8Array.from(atob(s),c=>c.charCodeAt(0));
 async function key(p,salt){const m=await crypto.subtle.importKey("raw",new TextEncoder().encode(p),"PBKDF2",false,["deriveKey"]);return crypto.subtle.deriveKey({name:"PBKDF2",salt:b(salt),iterations:ITER,hash:"SHA-256"},m,{name:"AES-GCM",length:256},false,["decrypt"])}
 async function open_(p){const k=await key(p,P.s);const pt=await crypto.subtle.decrypt({name:"AES-GCM",iv:b(P.i)},k,b(P.d));return new TextDecoder().decode(pt)}
-function show(t){document.open();document.write(t);document.close()}
+function show(t){var d=new DOMParser().parseFromString(t,"text/html");
+d.querySelectorAll("style").forEach(function(st){var n=document.createElement("style");n.textContent=st.textContent;document.head.appendChild(n)});
+d.querySelectorAll('link[rel="stylesheet"]').forEach(function(l){var n=document.createElement("link");n.rel="stylesheet";n.href=l.href;document.head.appendChild(n)});
+var holder=document.getElementById("stats-out");
+if(!holder){holder=document.createElement("div");holder.id="stats-out";document.querySelector(".wrap").appendChild(holder)}
+holder.innerHTML=d.body.innerHTML;
+d.body.querySelectorAll("script").forEach(function(s){var n=document.createElement("script");if(s.src)n.src=s.src;else n.textContent=s.textContent;document.body.appendChild(n)});
+var lb=document.querySelector(".box");if(lb)lb.style.display="none";window.scrollTo(0,holder.offsetTop)}
 const stored=sessionStorage.getItem("kwm_pw");
 if(stored){document.getElementById("s").style.display="block";open_(stored).then(t=>show(t)).catch(()=>{sessionStorage.removeItem("kwm_pw");document.getElementById("s").style.display="none"})}
 document.getElementById("f").addEventListener("submit",async ev=>{ev.preventDefault();
